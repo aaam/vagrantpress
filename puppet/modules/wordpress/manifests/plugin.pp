@@ -12,10 +12,4 @@ class wordpress::plugin  (
     command => "plugin activate $pluginname"
   }
 
-	/*
-	exec { 'install-plugin':
-		cwd => '/vagrant/wordpress/',
-		command => "/root/.wp-cli/vendor/wp-cli/wp-cli/bin/wp plugin install $pluginname",
-	}
-	*/
 }
