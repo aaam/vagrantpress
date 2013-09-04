@@ -9,3 +9,10 @@ class { 'php5::install': }
 class { 'mysql::install': }
 class { 'wordpress::install': }
 class { 'woocommerce::install': }
+
+
+
+wordpress::post { 'test-post':
+	title => 'Jildert rocks',
+	content => 'Yes he does',
+}

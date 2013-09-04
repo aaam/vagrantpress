@@ -54,5 +54,4 @@ class wordpress::install {
     command => "core update-db"
   }
 
-
 }
