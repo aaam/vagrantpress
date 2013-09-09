@@ -18,8 +18,10 @@ wordpress::post { 'test-post':
 	content => 'Yes he does',
 }
 
+/*
 woocommerce::product { 'test-product':
 	require => Class['woocommerce::install'],
 	title => 'Jildert rocks',
 	content => 'Yes he does',
 }
+*/
