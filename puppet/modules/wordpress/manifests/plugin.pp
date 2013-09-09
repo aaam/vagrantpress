@@ -1,20 +1,20 @@
-class wordpress::plugin  (
+define wordpress::plugin  (
 	$pluginname
 ){
 	
+    wordpress::cli{ "install-plugin-$pluginname": 
+	    command => "plugin install $pluginname",
+	    creates => "/vagrant/wordpress/wp-content/plugins/$pluginname",
+	    #before => class["activate-plugin-$pluginname"],
+	}
 
-	$plugin_exists = "test -e /vagrant/wordpress/wp-content/plugins/$pluginname"
-
-	#//if $plugin_exists.exitcode != 0 {
-	    wordpress::cli{ 'install-plugin': 
-		    command => "plugin install $pluginname",
-		  }
-
-
-		  wordpress::cli{ 'activate-plugin': 
-		    command => "plugin activate $pluginname",
-		  }
-	#//}
+	wordpress::cli{ "activate-plugin-$pluginname":
+		#require => Wordpress::cli["install-plugin-$pluginname"],
+		#require => wordpress::cli["install-plugin-$pluginname"],
+		command => "plugin activate $pluginname",
+	}
  
+ 	Wordpress::Cli["install-plugin-$pluginname"] -> Wordpress::Cli["activate-plugin-$pluginname"]
 
+	#wordpress::cli{ "install-plugin-$pluginname"
 }

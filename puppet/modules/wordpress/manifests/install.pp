@@ -29,13 +29,26 @@ class wordpress::install {
     creates => '/vagrant/wordpress',
   }
 
+  file { 'git-ignore-wordpress':
+    path     => '/vagrant/wordpress/.gitignore',
+    content => '*',
+    require => Exec['untar-wordpress'],    
+  }
+
   # Import a MySQL database for a basic wordpress site.
   file { '/tmp/wordpress-db.sql':
     source => 'puppet:///modules/wordpress/wordpress-db.sql'
   }
 
+  # Import a MySQL test
+  file { '/tmp/test-wordpress-db.sql':
+    source => 'puppet:///modules/wordpress/test-wordpress-db.sql'
+  }
+
   exec { 'load-db':
-    command => '/usr/bin/mysql -u wordpress -pwordpress wordpress < /tmp/wordpress-db.sql'
+    unless => "/usr/bin/mysql -u wordpress -pwordpress wordpress < /tmp/test-wordpress-db.sql",
+    command => '/usr/bin/mysql -u wordpress -pwordpress wordpress < /tmp/wordpress-db.sql',
+  
   }
 
   # Copy a working wp-config.php file for the vagrant setup.
@@ -50,7 +63,7 @@ class wordpress::install {
   }
 
   wordpress::cli{ 'wp-core-update-db': 
-    require => wordpress::cli['wp-core-update'],
+    require => Wordpress::Cli['wp-core-update'],
     command => "core update-db"
   }
 

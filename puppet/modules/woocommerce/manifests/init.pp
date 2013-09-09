@@ -2,9 +2,9 @@
 
 class woocommerce::install {
 
-  class { 'wordpress::plugin': 
-    pluginname => 'woocommerce',
-  }
+	wordpress::plugin {	'woocommerce-plugin':
+		pluginname => 'woocommerce',
+	}
 
 
 }
