@@ -8,6 +8,6 @@ define wordpress::cli  (
 		creates => $creates,
 		require => Exec['download-wp-cli'],
 		cwd => '/vagrant/wordpress/',
-		command => "/root/.wp-cli/bin/wp $command",
+		command => "/vagrant/wp-cli/bin/wp $command",
 	}
 }

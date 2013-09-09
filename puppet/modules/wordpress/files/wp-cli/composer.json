@@ -1,0 +1,17 @@
+{
+    "minimum-stability": "dev",
+	"repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/jildertmiedema/wp-cli-woocommerce.git"
+        }
+    ],
+    "require": {
+        "wp-cli/wp-cli": "@stable",
+    	"jildertmiedema/wp-cli-woocommerce": "*"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "vendor"
+    }
+}
