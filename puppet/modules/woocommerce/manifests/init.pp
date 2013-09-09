@@ -6,5 +6,8 @@ class woocommerce::install {
 		pluginname => 'woocommerce',
 	}
 
-
+	wordpress::cli{ 'woocommerce-install': 
+		require => Wordpress::Plugin['woocommerce-plugin'],		
+		command => 'woocommerce install'
+	}
 }

@@ -46,7 +46,7 @@ class wordpress::install {
   }
 
   exec { 'load-db':
-    #unless => "/usr/bin/mysql -u wordpress -pwordpress wordpress < /tmp/test-wordpress-db.sql",
+    unless => "/usr/bin/mysql -u wordpress -pwordpress wordpress < /tmp/test-wordpress-db.sql",
     command => '/usr/bin/mysql -u wordpress -pwordpress wordpress < /tmp/wordpress-db.sql',
   
   }
